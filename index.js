@@ -23,3 +23,20 @@ targetColorSelection.addEventListener("change", function () {
 
   targetCar.src = imagePath;
 });
+
+function refreshPaintJobs() {
+  $.ajax({
+    url: "process.php",
+    method: "GET",
+    success: function (response) {
+      $("#paint-jobs-table").html(response);
+    },
+    error: function () {
+      console.log("Error refreshing paint jobs");
+    },
+  });
+}
+
+refreshPaintJobs();
+
+setInterval(refreshPaintJobs, 5000);

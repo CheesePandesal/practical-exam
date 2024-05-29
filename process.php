@@ -11,12 +11,26 @@ $conn = new mysqli('localhost', 'root', '', 'paint-jobs');
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-} else {
-    $stmt = $conn->prepare("INSERT INTO `paint-progress` (plateNo, currentColor, targetColor) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $plateNo, $currentColor, $targetColor);
-    $stmt->execute();
-    echo "registration sucessfully";
-    $stmt->close();
-    $conn->close();
-    header("Location: paint-jobs.html");
 }
+
+$query = "SELECT COUNT(*) AS count FROM paint_progress";
+$result = $conn->query($query);
+$row = $result->fetch_assoc();
+$count = $row['count'];
+
+
+if ($count < 5) {
+    $query = "INSERT INTO paint_progress (plateNo, currentColor, targetColor) VALUES ('$plateNo', '$currentColor', '$targetColor')";
+} else {
+
+    $query = "INSERT INTO paint_job_queue (plateNo, currentColor, targetColor) VALUES ('$plateNo', '$currentColor', '$targetColor')";
+}
+
+
+if ($conn->query($query) === TRUE) {
+    header("Location: paint-jobs.php");
+} else {
+    echo "Error: " . $query . "<br>" . $conn->error;
+}
+
+$conn->close();
