@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="index.js" defer></script>
+    <title>Juan's Auto Paint</title>
+  </head>
+  <body>
+    <header>
+      <div class="header-title">
+        <h1>Juan's Auto Paint</h1>
+      </div>
+      <nav>
+        <ul>
+          <li class="nav-link active">
+            <a href="index.html">New Paint Job</a>
+          </li>
+          <li class="nav-link"><a href="paint-jobs.html">Paint Jobs</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <h2 class="main-title">New Paint Job</h2>
+        <div class="cars">
+          <figure>
+            <img
+              src="assets/Default Car.png"
+              alt="Current Car"
+              id="current-car-image"
+            />
+          </figure>
+          <figure>
+            <img
+              src="assets/Default Car.png"
+              alt="Target Car"
+              id="target-car-image"
+            />
+          </figure>
+        </div>
+      </section>
+      <section>
+        <form action="process.php" method="post">
+          <h1 class="form-title">Car Details</h1>
+          <div>
+            <label for="plate-no">Plate No.</label>
+            <input type="text" name="plate-no" id="plate-no" />
+          </div>
+          <div>
+            <label for="current-color-selection">Current Color</label>
+            <select name="current-color-selection" id="current-color-selection">
+              <option value="empty"></option>
+              <option value="red">Red</option>
+              <option value="green">Green</option>
+              <option value="blue">Blue</option>
+            </select>
+          </div>
+          <div>
+            <label for="target-color-selection">Target Color</label>
+            <select name="target-color-selection" id="target-color-selection">
+              <option value="empty"></option>
+              <option value="red">Red</option>
+              <option value="green">Green</option>
+              <option value="blue">Blue</option>
+            </select>
+          </div>
+          <button type="submit" class="submit-button">Submit</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
