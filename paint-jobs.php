@@ -27,7 +27,42 @@
     <h2 class="main-title">Paint Jobs</h2>
 
     <section>
-      <table></table>
+      <?php
+      $conn = new mysqli('localhost', 'root', '', 'paint-jobs');
+
+
+      if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+      }
+
+
+      $query = "SELECT * FROM `paint-progress`";
+
+      $result = $conn->query($query);
+
+
+      echo '<table border="1">';
+      echo '<tr><th>Plate No.</th><th>Current Color</th><th>Target Color</th></tr>';
+
+
+      if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+          echo '<tr>';
+          echo '<td>' . $row["plateNo"] . '</td>';
+          echo '<td>' . $row["currentColor"] . '</td>';
+          echo '<td>' . $row["targetColor"] . '</td>';
+          echo '</tr>';
+        }
+      } else {
+        echo '<tr><td colspan="3">No data found</td></tr>';
+      }
+
+      echo '</table>';
+
+
+      $conn->close();
+      ?>
+
     </section>
   </main>
 </body>
